@@ -34,7 +34,7 @@ def ecco_podaac_download(ShortName,StartDate,EndDate,download_root_dir=None,n_wo
     from pathlib import Path
     from platform import system
     from netrc import netrc
-    from os.path import basename, isfile, isdir, join
+    from os.path import basename, isfile, isdir, join, expanduser
     # progress bar
     from tqdm import tqdm
     # library to download files
@@ -47,6 +47,10 @@ def ecco_podaac_download(ShortName,StartDate,EndDate,download_root_dir=None,n_wo
         user_home_dir = expanduser('~')
         download_root_dir = Path(user_home_dir + '/Downloads/ECCO_V4r4_PODAAC')
     else:
+        import sys
+        from os.path import expanduser
+        user_home_dir = expanduser('~')
+        download_root_dir = Path(user_home_dir + '/Downloads/ECCO_V4r4_PODAAC')
         download_root_dir = Path(download_root_dir)
     
     # Predict the path of the netrc file depending on os/platform type.
